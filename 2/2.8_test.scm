@@ -1,0 +1,10 @@
+(load "../test.scm")
+(load "2.8.scm")
+
+(define (test)
+  (let ((i1 (make-interval 1 3))
+        (i2 (make-interval 2 4)))
+    (let ((sub-i (sub-interval i2 i1)))
+      (begin (assert-eq -1 (lower-bound sub-i) "Failed sub-i lower-bound")
+             (assert-eq 3 (upper-bound sub-i) "Failed sub-i upper-bound")))))
+(test)
