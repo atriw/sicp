@@ -1,0 +1,11 @@
+(load "../test.scm")
+(load "2.5.scm")
+
+(define (test)
+  (let ((p1 (cons1 4 5))
+        (p2 (cons1 0 2)))
+    (begin (assert-eq 4 (car1 p1) "Failed car1")
+           (assert-eq 5 (cdr1 p1) "Failed cdr1")
+           (assert-eq 0 (car1 p2) "Failed car1 p2")
+           (assert-eq 2 (cdr1 p2) "Failed cdr1 p2"))))
+(test)
