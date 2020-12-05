@@ -1,0 +1,10 @@
+(load "../test.scm")
+(load "2.33.scm")
+
+(define (test)
+  (let ((seq1 (list 1 2 3))
+        (seq2 (list 4 5 6)))
+    (begin (assert-eq (list 1 4 9) (map square seq1) "Failed map")
+           (assert-eq (list 1 2 3 4 5 6) (append seq1 seq2) "Failed append")
+           (assert-eq 3 (length seq1) "Failed length"))))
+(test)
