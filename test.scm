@@ -6,7 +6,7 @@
         ((and (not (pair? p1)) (not (pair? p2))) (= p1 p2))
         ((and (pair? p1) (not (pair? p2))) #f)
         ((and (not (pair? p1)) (pair? p2)) #f)
-        (else (and (= (car p1) (car p2)) (equal (cdr p1) (cdr p2))))))
+        (else (and (equal (car p1) (car p2)) (equal (cdr p1) (cdr p2))))))
 
 (define (assert op want got msg)
   (if (op want got)
