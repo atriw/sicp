@@ -1,0 +1,15 @@
+(load "../test.scm")
+(load "2.37.scm")
+
+(define v1 (list 1 2 3 4))
+(define v2 (list 5 6 7 8))
+(define matrix1 (list (list 1 2 3 4) (list 5 6 7 8) (list 9 10 11 12)))
+(define matrix-transpose (list (list 1 5 9) (list 2 6 10) (list 3 7 11) (list 4 8 12)))
+(define product-matrix (list (list 30 70 110) (list 70 174 278) (list 110 278 446)))
+
+(define (test)
+  (begin (assert-eq 70 (dot-product v1 v2) "Failed dot-product")
+         (assert-eq (list 30 70 110) (matrix-*-vector matrix1 v1) "Failed matrix-*-vector")
+         (assert-eq matrix-transpose (transpose matrix1) "Failed transpose")
+         (assert-eq product-matrix (matrix-*-matrix matrix1 matrix-transpose) "Failed matrix-*-matrix")))
+(test)
