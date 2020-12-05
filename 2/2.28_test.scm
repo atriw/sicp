@@ -1,0 +1,10 @@
+(load "../test.scm")
+(load "2.28.scm")
+
+(define (test)
+  (let ((x (list (list 1 2) (list 3 4)))
+        (want1 (list 1 2 3 4))
+        (want2 (list 1 2 3 4 1 2 3 4)))
+    (begin (assert-eq want1 (fringe x) "Failed fringe 1")
+           (assert-eq want2 (fringe (list x x)) "Failed fringe 2"))))
+(test)
