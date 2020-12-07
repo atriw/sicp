@@ -11,3 +11,8 @@
   (if (> low high)
     '()
     (cons low (enumerate-interval (+ 1 low) high))))
+
+(define (takef lst pred)
+  (if (or (null? lst) (not (pred (car lst))))
+    '()
+    (cons (car lst) (takef (cdr lst) pred))))
