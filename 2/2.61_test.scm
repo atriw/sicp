@@ -1,0 +1,10 @@
+(load "../test.scm")
+(load "2.61.scm")
+
+(define (test)
+  (let ((set1 (adjoint-set 4 (adjoint-set 2 (adjoint-set 5 (adjoint-set 1 '())))))
+        (set2 (adjoint-set 6 (adjoint-set 4 (adjoint-set 1 (adjoint-set 2 '()))))))
+    (begin (assert-eq (list 1 2 4 5) set1 "Failed adjoint-set")
+           (assert-eq (list 1 2 4 6) set2 "Failed adjoint-set")
+           (assert-eq (list 1 2 4) (intersection-set set1 set2) "Failed intersection-set"))))
+(test)
