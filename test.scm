@@ -10,3 +10,8 @@
 (define (assert-eq want got msg)
   (assert equal? want got msg))
 
+(define (assert-error fn msg)
+  (if (condition/error? (ignore-errors fn))
+    (begin (display "Test pass.") (newline))
+    (error msg
+           "Should have error.")))
