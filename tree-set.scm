@@ -4,7 +4,7 @@
 (define make-tree list)
 
 (define (element-of-set? x set)
-  (cond ((null? set) #t)
+  (cond ((null? set) #f)
         ((= x (entry set)) #t)
         ((< x (entry set))
          (element-of-set? x (left-branch set)))
