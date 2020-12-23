@@ -1,21 +1,27 @@
+(load-option 'hash-table)
+
+(define global-table
+  (make-equal-hash-table))
+
 (define (put op type item)
-  (2d-put! op type item))
+  (hash-table/put! global-table (cons op type) item)
+  'done)
 
 (define (get op type)
-  (2d-get op type))
+  (hash-table/get global-table (cons op type) #f))
 
 (define (attach-tag type-tag contents)
   (cons type-tag contents))
 
 (define (type-tag datum)
-  (if (pair? datum)
-    (car datum)
-    (error "Bad tagged datum: TYPE-TAG" datum)))
+  (cond ((symbol? datum) 'symbol)
+        ((pair? datum) (car datum))
+        (else (error "Bad tagged datum: TYPE-TAG" datum))))
 
 (define (contents datum)
-  (if (pair? datum)
-    (cdr datum)
-    (error "Bad tagged datum: CONTENTS" datum)))
+  (cond ((symbol? datum) datum)
+        ((pair? datum) (cdr datum))
+        (else (error "Bad tagged datum: CONTENTS" datum))))
 
 (define (apply-generic op . args)
   (let ((type-tags (map type-tag args)))
