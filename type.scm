@@ -11,15 +11,21 @@
   (hash-table/get global-table (cons op type) #f))
 
 (define (attach-tag type-tag contents)
-  (cons type-tag contents))
+  (if (or
+        (eq? type-tag 'symbol)
+        (eq? type-tag 'scheme-number))
+    contents
+    (cons type-tag contents)))
 
 (define (type-tag datum)
   (cond ((symbol? datum) 'symbol)
+        ((number? datum) 'scheme-number)
         ((pair? datum) (car datum))
         (else (error "Bad tagged datum: TYPE-TAG" datum))))
 
 (define (contents datum)
   (cond ((symbol? datum) datum)
+        ((number? datum) 'scheme-number)
         ((pair? datum) (cdr datum))
         (else (error "Bad tagged datum: CONTENTS" datum))))
 
