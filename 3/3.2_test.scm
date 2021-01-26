@@ -1,0 +1,13 @@
+(load "../test.scm")
+(load "3.2.scm")
+
+(define (test)
+  (let ((s (make-monitored sqrt)))
+    (begin (assert-eq 0 (s 'how-many-calls?) "Failed how-many-calls?")
+           (assert-eq 2 (s 4) "Failed sqrt")
+           (assert-eq 1 (s 'how-many-calls?) "Failed how-many-calls?")
+           (assert-eq 4 (s 16) "Failed sqrt")
+           (assert-eq 2 (s 'how-many-calls?) "Failed how-many-calls?")
+           (s 'reset-count)
+           (assert-eq 0 (s 'how-many-calls?) "Failed how-many-calls?"))))
+(test)
