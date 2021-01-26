@@ -1,0 +1,11 @@
+(load "../monte-carlo.scm")
+
+(define (estimate-integral P x1 x2 y1 y2 trials)
+  (define (random-in-range low high)
+    (let ((range (- high low)))
+      (+ low (random range))))
+  (define (experiment)
+    (P (random-in-range (min x1 x2) (max x1 x2))
+       (random-in-range (min y1 y2) (max y1 y2))))
+  (let ((area (abs (* (- y2 y1) (- x2 x1)))))
+    (* area (monte-carlo trials experiment))))
