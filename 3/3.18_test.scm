@@ -1,0 +1,16 @@
+(load "../test.scm")
+(load "./3.18.scm")
+
+(define (test)
+  (define cycle1
+    (let ((cycle (list 1 2 3)))
+      (set-cdr! (last-pair cycle) cycle)
+      cycle))
+  (define cycle2
+    (let ((cycle (list 1 2 (cons 1 2) 4 5)))
+      (set-cdr! (caddr cycle) cycle)
+      cycle))
+  (begin (assert-eq #t (cycle? cycle1) "Failed cycle1")
+         (assert-eq #t (cycle? cycle2) "Failed cycle2")
+         (assert-eq #f (cycle? (list 1 2 3)) "Failed not cycle")))
+(test)

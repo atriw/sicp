@@ -1,0 +1,8 @@
+(define (cycle? l)
+  (define (cycle-iter x counted)
+    (cond ((not (pair? x)) #f)
+          ((memq x counted) #t)
+          (else (let ((new-counted (cons x counted)))
+                  (or (cycle-iter (car x) new-counted)
+                      (cycle-iter (cdr x) new-counted))))))
+  (cycle-iter l '()))
