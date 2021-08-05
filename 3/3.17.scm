@@ -1,0 +1,6 @@
+(define (count-pairs x)
+  (define (count-iter x counted)
+    (if (and (pair? x) (not (memq x counted)))
+      (count-iter (car x) (count-iter (cdr x) (cons x counted)))
+      counted))
+  (length (count-iter x '())))
