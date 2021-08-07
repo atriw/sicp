@@ -1,4 +1,4 @@
-(load "./queue.scm")
+(load "queue.scm")
 
 (define the-agenda (make-agenda))
 (define inverter-delay 2)
