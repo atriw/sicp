@@ -1,4 +1,4 @@
-(load "../list.scm")
+(load "list.scm")
 
 (define (queens board-size)
   (define (queen-cols k)

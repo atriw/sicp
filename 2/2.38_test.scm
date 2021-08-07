@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.38.scm")
+(load "test.scm")
+(load "2/2.38.scm")
 
 (define (test)
   (begin (assert-eq (/ 3 2) (fold-right / 1 (list 1 2 3)) "Failed fold-right /")

@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "./3.25.scm")
+(load "test.scm")
+(load "3/3.25.scm")
 
 (define (test)
   (let ((table (make-table)))

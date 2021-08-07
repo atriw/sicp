@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.29.scm")
+(load "test.scm")
+(load "2/2.29.scm")
 
 (define branch1 (make-branch 10 7))
 (define mobile1 (make-mobile branch1 empty-branch))

@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.68.scm")
+(load "test.scm")
+(load "2/2.68.scm")
 
 (define sample-tree
   (make-code-tree (make-leaf 'A 4)

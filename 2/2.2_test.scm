@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.2.scm")
+(load "test.scm")
+(load "2/2.2.scm")
 
 (define (test)
   (let ((p1 (make-point 1 2))

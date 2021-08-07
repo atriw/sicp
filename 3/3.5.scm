@@ -1,4 +1,4 @@
-(load "../monte-carlo.scm")
+(load "monte-carlo.scm")
 
 (define (estimate-integral P x1 x2 y1 y2 trials)
   (define (random-in-range low high)

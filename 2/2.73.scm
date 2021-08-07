@@ -1,4 +1,4 @@
-(load "../type.scm")
+(load "type.scm")
 
 (define (deriv exp var)
   (cond ((number? exp) 0)

@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.37.scm")
+(load "test.scm")
+(load "2/2.37.scm")
 
 (define v1 (list 1 2 3 4))
 (define v2 (list 5 6 7 8))

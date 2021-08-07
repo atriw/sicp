@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "3.4.scm")
+(load "test.scm")
+(load "3/3.4.scm")
 
 (define (test)
   (let ((acc (make-account 100 'some-password)))

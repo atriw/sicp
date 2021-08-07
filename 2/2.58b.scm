@@ -1,4 +1,4 @@
-(load "../list.scm")
+(load "list.scm")
 
 (define (deriv exp var)
   (cond ((number? exp) 0)

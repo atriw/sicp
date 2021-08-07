@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.46.scm")
+(load "test.scm")
+(load "2/2.46.scm")
 
 (define (test)
   (let ((v1 (make-vect 1 2))

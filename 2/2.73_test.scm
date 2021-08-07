@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.73.scm")
+(load "test.scm")
+(load "2/2.73.scm")
 
 (define (test)
   (let ((e1 (make-sum (make-product 3 'x) (make-product 'y 'x)))

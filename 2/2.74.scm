@@ -1,4 +1,4 @@
-(load "../type.scm")
+(load "type.scm")
 
 (define (make-file type . records)
   (let ((file/cons (get 'make-file type)))

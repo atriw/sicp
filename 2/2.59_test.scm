@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.59.scm")
+(load "test.scm")
+(load "2/2.59.scm")
 
 (define (test)
   (let ((set1 (list 1 2 3 4))

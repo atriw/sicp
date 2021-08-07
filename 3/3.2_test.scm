@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "3.2.scm")
+(load "test.scm")
+(load "3/3.2.scm")
 
 (define (test)
   (let ((s (make-monitored sqrt)))

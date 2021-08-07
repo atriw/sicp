@@ -1,4 +1,4 @@
-(load "2.2.scm")
+(load "2/2.2.scm")
 
 (define (length-segment s)
   (let ((start (start-segment s))

@@ -1,6 +1,6 @@
-(load "../test.scm")
-(load "2.69.scm")
-(load "2.68.scm")
+(load "test.scm")
+(load "2/2.69.scm")
+(load "2/2.68.scm")
 
 (define sample-tree (generate-huffman-tree '((A 4) (B 2) (C 1) (D 1))))
 (define sample-message '(0 1 1 0 0 1 0 1 0 1 1 1 0))

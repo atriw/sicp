@@ -1,5 +1,5 @@
-(load "2.17.scm")
-(load "2.40.scm")
+(load "2/2.17.scm")
+(load "2/2.40.scm")
 
 (define (three-sum n s)
   (map (lambda (pair)

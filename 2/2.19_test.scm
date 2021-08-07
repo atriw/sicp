@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.19.scm")
+(load "test.scm")
+(load "2/2.19.scm")
 
 (define (test)
   (begin (assert-eq 292 (cc 100 us-coins) "Failed")

@@ -1,4 +1,4 @@
-(load "../list.scm")
+(load "list.scm")
 
 (define (unique-pairs n)
   (flatmap

@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.63.scm")
+(load "test.scm")
+(load "2/2.63.scm")
 
 (define tree1 (adjoin-set
                 11

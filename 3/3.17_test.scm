@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "./3.17.scm")
+(load "test.scm")
+(load "3/3.17.scm")
 
 (define (test)
   (define cycle

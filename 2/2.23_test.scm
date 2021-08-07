@@ -1,4 +1,4 @@
-(load "2.23.scm")
+(load "2/2.23.scm")
 
 (for-each (lambda (x)
             (newline)

@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "./3.23.scm")
+(load "test.scm")
+(load "3/3.23.scm")
 
 (define (test)
   (let ((deque (make-deque)))

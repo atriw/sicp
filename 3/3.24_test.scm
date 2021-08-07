@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "./3.24.scm")
+(load "test.scm")
+(load "3/3.24.scm")
 
 (define (test)
   (define (same-key-with-tolerant? tol)

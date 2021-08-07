@@ -1,4 +1,4 @@
-(load "2.61.scm")
+(load "2/2.61.scm")
 
 (define (union-set set1 set2)
   (cond ((null? set1) set2)

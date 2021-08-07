@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.57.scm")
+(load "test.scm")
+(load "2/2.57.scm")
 
 (define (test)
   (assert-eq

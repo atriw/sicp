@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.56.scm")
+(load "test.scm")
+(load "2/2.56.scm")
 
 (define (test)
     (let ((e1 (make-exponentiation (make-sum 'x 1) 'y))

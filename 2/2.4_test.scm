@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.4.scm")
+(load "test.scm")
+(load "2/2.4.scm")
 
 (define (test)
   (let ((p1 (cons1 1 2)))

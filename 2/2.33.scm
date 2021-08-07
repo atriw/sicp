@@ -1,4 +1,4 @@
-(load "../list.scm")
+(load "list.scm")
 
 (define (map p sequence)
   (accumulate (lambda (x y)

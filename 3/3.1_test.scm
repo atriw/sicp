@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "3.1.scm")
+(load "test.scm")
+(load "3/3.1.scm")
 
 (define (test)
   (let ((acc (make-accumulator 5)))

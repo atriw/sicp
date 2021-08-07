@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.42.scm")
+(load "test.scm")
+(load "2/2.42.scm")
 
 (define (test)
   (let ((want-1 (list (list (make-position 1 1))))

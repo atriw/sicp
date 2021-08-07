@@ -1,4 +1,4 @@
-(load "../list.scm")
+(load "list.scm")
 
 (define (reverse l)
   (if (null? l)

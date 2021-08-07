@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "3.5.scm")
+(load "test.scm")
+(load "3/3.5.scm")
 
 (define (test)
   (define (unit-circle x y)

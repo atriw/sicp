@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "./3.22.scm")
+(load "test.scm")
+(load "3/3.22.scm")
 
 (define (test)
   (let ((q (make-queue)))

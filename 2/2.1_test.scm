@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.1.scm")
+(load "test.scm")
+(load "2/2.1.scm")
 
 (define (test)
   (let ((r1 (make-rat -2 3))

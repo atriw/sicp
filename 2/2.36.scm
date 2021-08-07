@@ -1,4 +1,4 @@
-(load "../list.scm")
+(load "list.scm")
 
 (define (accumulate-n op init seqs)
   (if (null? (car seqs))

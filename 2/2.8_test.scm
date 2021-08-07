@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.8.scm")
+(load "test.scm")
+(load "2/2.8.scm")
 
 (define (test)
   (let ((i1 (make-interval 1 3))

@@ -1,6 +1,6 @@
-(load "../test.scm")
-(load "2.68.scm")
-(load "2.69.scm")
+(load "test.scm")
+(load "2/2.68.scm")
+(load "2/2.69.scm")
 
 (define alphabet
   '((A 2) (GET 2) (SHA 3) (WAH 1)

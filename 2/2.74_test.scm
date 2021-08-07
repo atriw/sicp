@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.74.scm")
+(load "test.scm")
+(load "2/2.74.scm")
 
 (install-division-1)
 (install-division-2)

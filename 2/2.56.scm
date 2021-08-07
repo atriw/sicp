@@ -1,4 +1,4 @@
-(load "../deriv.scm")
+(load "deriv.scm")
 
 (define (deriv exp var)
   (cond ((number? exp) 0)

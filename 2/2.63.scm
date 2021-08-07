@@ -1,4 +1,4 @@
-(load "../tree-set.scm")
+(load "tree-set.scm")
 
 (define (tree->list-1 tree)
   (if (null? tree)

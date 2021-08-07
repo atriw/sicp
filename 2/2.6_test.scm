@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "2.6.scm")
+(load "test.scm")
+(load "2/2.6.scm")
 
 (define (test)
   (let ((f (lambda (x) (+ 1 x)))

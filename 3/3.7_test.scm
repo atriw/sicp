@@ -1,5 +1,5 @@
-(load "../test.scm")
-(load "./3.7.scm")
+(load "test.scm")
+(load "3/3.7.scm")
 
 (define (test)
   (define peter-acc (make-account 100 'open-sesame))

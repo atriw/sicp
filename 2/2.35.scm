@@ -1,4 +1,4 @@
-(load "../list.scm")
+(load "list.scm")
 
 (define (count-leaves t)
   (accumulate + 0 (map (lambda (sub-t)

@@ -1,5 +1,5 @@
-(load "../tree-set.scm")
-(load "2.63.scm")
+(load "tree-set.scm")
+(load "2/2.63.scm")
 
 (define (union-set set1 set2)
     (define (union-list-set l1 l2)
