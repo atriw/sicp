@@ -1,0 +1,13 @@
+(load "circuit-simulate.scm")
+
+(define (or-gate o1 o2 output)
+  (let ((i1 (make-wire))
+        (i2 (make-wire))
+        (ai (make-wire)))
+    (inverter o1 i1)
+    (inverter o2 i2)
+    (and-gate i1 i2 ai)
+    (probe 'i1 i1)
+    (probe 'i2 i2)
+    (probe 'ai ai)
+    (inverter ai output)))
