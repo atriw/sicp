@@ -1,5 +1,7 @@
 (load "queue.scm")
 
+(define (make-agenda) (list 0))
+
 (define the-agenda (make-agenda))
 (define inverter-delay 2)
 (define and-gate-delay 3)
@@ -85,7 +87,6 @@
 (define segment-time car)
 (define segment-queue cdr)
 
-(define (make-agenda) (list 0))
 (define (current-time agenda) (car agenda))
 (define (set-current-time! agenda time)
   (set-car! agenda time))
@@ -106,7 +107,7 @@
       (insert-queue! q action)
       (make-time-segment time q)))
   (define (add-to-segments! segments)
-    (if (= (segment-time (car segments) time))
+    (if (= (segment-time (car segments)) time)
       (insert-queue! (segment-queue (car segments))
                      action)
       (let ((rest (cdr segments)))
@@ -115,7 +116,7 @@
           (add-to-segments! rest)))))
   (let ((segments (segments agenda)))
     (if (belongs-before? segments)
-      (set-segments! agenda (cons (make-new-time-segment time action) (cdr segments)))
+      (set-segments! agenda (cons (make-new-time-segment time action) segments))
       (add-to-segments! segments))))
 
 (define (remove-first-agenda-item! agenda)
