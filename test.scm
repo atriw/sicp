@@ -1,6 +1,6 @@
 (define (assert op want got msg)
   (if (op want got)
-    (begin (display "Test pass.") (newline))
+    (begin (newline) (display "Test pass.") (newline))
     (error msg
            (error-irritant/noise ". want: ")
            want
@@ -12,6 +12,6 @@
 
 (define (assert-error fn msg)
   (if (condition/error? (ignore-errors fn))
-    (begin (display "Test pass.") (newline))
+    (begin (newline) (display "Test pass.") (newline))
     (error msg
            "Should have error.")))
