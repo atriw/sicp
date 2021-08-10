@@ -1,6 +1,6 @@
 (define (add-streams s1 s2) (stream-map + s1 s2))
 
-(define (scale-streams s f)
+(define (scale-stream s f)
   (stream-map
     (lambda (x) (* x f)) s))
 
