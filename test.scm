@@ -1,6 +1,9 @@
+(define (test-pass)
+  (newline) (display "Test pass") (newline))
+
 (define (assert op want got msg)
   (if (op want got)
-    (begin (newline) (display "Test pass.") (newline))
+    (test-pass)
     (error msg
            (error-irritant/noise ". want: ")
            want
@@ -12,6 +15,19 @@
 
 (define (assert-error fn msg)
   (if (condition/error? (ignore-errors fn))
-    (begin (newline) (display "Test pass.") (newline))
+    (test-pass)
     (error msg
            "Should have error.")))
+
+(define (assert-stream s l msg)
+  (cond ((null? l) (test-pass))
+        (else
+          (let ((sv (stream-car s))
+                (sl (car l)))
+            (if (= sv sl)
+              (assert-stream (stream-cdr s) (cdr l) msg)
+              (error msg
+                     (error-irritant/noise " Stream not equal list, sv: ")
+                     sv
+                     (error-irritant/noise " sl: ")
+                     sl))))))
