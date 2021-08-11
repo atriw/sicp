@@ -24,7 +24,7 @@
         (else
           (let ((sv (stream-car s))
                 (sl (car l)))
-            (if (= sv sl)
+            (if (equal? sv sl)
               (assert-stream (stream-cdr s) (cdr l) msg)
               (error msg
                      (error-irritant/noise " Stream not equal list, sv: ")
