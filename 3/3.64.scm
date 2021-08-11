@@ -1,0 +1,6 @@
+(define (stream-limit s tolerance)
+  (define (iter s1 s2)
+    (if (< (abs (- (stream-car s1) (stream-car s2))) tolerance)
+      (stream-car s2)
+      (iter (stream-cdr s1) (stream-cdr s2))))
+  (iter s (stream-cdr s)))
