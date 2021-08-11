@@ -1,3 +1,10 @@
+(define (display-stream s n)
+  (if (> n 0)
+    (begin
+      (newline)
+      (display (stream-car s))
+      (display-stream (stream-cdr s) (- n 1)))))
+
 (define (add-streams s1 s2) (stream-map + s1 s2))
 
 (define (scale-stream s f)
