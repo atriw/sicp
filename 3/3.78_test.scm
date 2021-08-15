@@ -4,7 +4,7 @@
 (define dt 0.0001)
 (define pi 31415)
 
-(define (test)
+(define (test y)
   ; let a = 4, b = -5
   ; y`` - 4 y` + 5y = 0
   ; => y = C1 e^2x cosx + C2 e^2x sinx
@@ -16,11 +16,10 @@
   ; => C1 = 1, C2 = 1
   ; y(pi/2) = e^pi    = 23.1406
   ; y(pi)   = -e^2*pi = -535.4916
-  (let ((y (solve-2nd 4 -5 dt 1 3)))
-    (define (equal-with-tolerance x y) (> 1 (abs (- x y))))
-    (assert equal-with-tolerance 23.1406 (stream-ref y (quotient pi 2)) "Failed y(pi/2)")
-    (assert equal-with-tolerance -535.4916 (stream-ref y pi) "Failed y(pi)")))
-(test)
+  (define (equal-with-tolerance x y) (> 1 (abs (- x y))))
+  (assert equal-with-tolerance 23.1406 (stream-ref y (quotient pi 2)) "Failed y(pi/2)")
+  (assert equal-with-tolerance -535.4916 (stream-ref y pi) "Failed y(pi)"))
+(test (solve-2nd 4 -5 dt 1 3))
 
 (define (test2)
   (define (equal-with-tolerance x y) (< (abs (- x y)) 0.001))
