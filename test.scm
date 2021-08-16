@@ -13,6 +13,9 @@
 (define (assert-eq want got msg)
   (assert equal? want got msg))
 
+(define (assert-eq-tolerance tolerance want got msg)
+  (assert (lambda (x y) (< (abs (- x y)) tolerance)) want got msg))
+
 (define (assert-error fn msg)
   (if (condition/error? (ignore-errors fn))
     (test-pass)
