@@ -7,3 +7,13 @@
                  (+ trials-passed 1)))
           (else (iter (- trials-remaining 1) trials-passed))))
   (iter trials 0))
+
+(define (monte-carlo-stream experiment-stream passed failed)
+  (define (next passed failed)
+    (cons-stream
+      (/ passed (+ passed failed))
+      (monte-carlo-stream
+        (stream-cdr experiment-stream) passed failed)))
+  (if (stream-car experiment-stream)
+    (next (+ passed 1) failed)
+    (next passed (+ failed 1))))
