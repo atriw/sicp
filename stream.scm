@@ -96,3 +96,8 @@
       (let ((integrand (force delayed-integrand)))
         (add-streams (scale-stream integrand dt) int))))
   int)
+
+(define (list->stream lst)
+  (cond ((null? lst) the-empty-stream)
+        (else
+          (cons-stream (car lst) (list->stream (cdr lst))))))

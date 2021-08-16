@@ -11,11 +11,6 @@
       (sign-change-detector (stream-car input-stream) last-value)
       (make-zero-crossings (stream-cdr input-stream) (stream-car input-stream)))))
 
-(define (list->stream lst)
-  (cond ((null? lst) the-empty-stream)
-        (else
-          (cons-stream (car lst) (list->stream (cdr lst))))))
-
 (define sense-data
   (list->stream (list 1 2 1.5 1 0.5 -0.1 -2 -3 -2 -0.5 0.2 3 4)))
 
