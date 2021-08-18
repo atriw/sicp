@@ -1,0 +1,10 @@
+(load "evaluator.scm")
+(load "syntax.scm")
+(load "environment.scm")
+
+(define (start)
+  (let ((env-model (make-environment-model))
+        (syntax (make-syntax)))
+    (let ((evaluator (make-evaluator syntax env-model)))
+      (let ((loop (make-driver-loop evaluator env-model)))
+        (loop)))))
