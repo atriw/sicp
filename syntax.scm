@@ -118,6 +118,10 @@
           ((eq? m 'assignment-value) assignment-value)
           ((eq? m 'definition-variable) definition-variable)
           ((eq? m 'definition-value) definition-value)
+          ; Added by Exercise 4.4
+          ; Not implemented.
+          ((eq? m 'and?) (lambda (exp) #f))
+          ((eq? m 'or?) (lambda (exp) #f))
           (else
             (error "Unknown syntax" m))))
   dispatch)

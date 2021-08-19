@@ -40,6 +40,11 @@
   (define definition-variable (syntax 'definition-variable))
   (define definition-value (syntax 'definition-value))
 
+  ; Added by Exercise 4.4
+  (define and? (syntax 'and?))
+  (define or? (syntax 'or?))
+  ; operands, no-operands?, first-operand, rest-operands are the same as application
+
   (define true? (environment-model 'true?))
   (define make-procedure (environment-model 'make-procedure))
   (define compound-procedure? (environment-model 'compound-procedure?))
@@ -66,6 +71,8 @@
           ((begin? exp)
            (eval-sequence (begin-actions exp) env))
           ((cond? exp) (eval (cond->if exp) env))
+          ((and? exp) (eval-and (operands exp) env))
+          ((or? exp) (eval-or (operands exp) env))
           ((application? exp)
            (apply (eval (operator exp) env)
                   (list-of-values (operands exp) env)))
@@ -109,9 +116,17 @@
                       env)
     'ok)
   (define (mock-list-of-values double) (set! list-of-values double))
+
+  ; Added by Exercise 4.4
+  (define (eval-and exps env) (error "Not implemented: EVAL-AND"))
+  (define (eval-or exps env) (error "Not implemented: EVAL-OR"))
+  (define (implement-eval-and impl) (set! eval-and impl))
+  (define (implement-eval-or impl) (set! eval-or impl))
   (define (dispatch m)
     (cond ((eq? m 'eval) eval)
           ((eq? m 'mock-list-of-values) mock-list-of-values)
+          ((eq? m 'implement-eval-and) implement-eval-and)
+          ((eq? m 'implement-eval-or) implement-eval-or)
           (else
             (error "Unknown operation" m))))
   dispatch)
