@@ -9,7 +9,7 @@
   (define test-suite
     (setup-test
       '()
-      (lambda (evaluator syntax)
+      (lambda (evaluator syntax env-model)
         ((evaluator 'mock-list-of-values) (make-list-of-values evaluator syntax)))))
   (define (test-fn eval env)
     (eval probe-procedure env)

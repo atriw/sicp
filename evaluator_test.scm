@@ -11,7 +11,7 @@
 
 (define (setup-test
           modify-syntax ; lambda (syntax) -> syntax
-          mock) ; lambda (evaluator syntax) -> ()
+          mock) ; lambda (evaluator syntax env-model) -> ()
   (define syntax
     (if (not (null? modify-syntax))
       (modify-syntax (make-syntax))
@@ -22,5 +22,5 @@
   (define eval (evaluator 'eval))
   (define (test fn) ; fn: lambda (eval env) -> ()
     (fn eval env))
-  (if (not (null? mock)) (mock evaluator syntax))
+  (if (not (null? mock)) (mock evaluator syntax env-model))
   test)
