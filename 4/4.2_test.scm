@@ -1,0 +1,16 @@
+(load "test.scm")
+(load "4/4.2.scm")
+(load "evaluator.scm")
+(load "environment.scm")
+(load "syntax.scm")
+
+(define (test)
+  (define syntax (new-syntax (make-syntax)))
+  (define env-model (make-environment-model))
+  (define evaluator (make-evaluator syntax env-model))
+  (define the-global-env ((env-model 'setup-environment)))
+  (define eval (evaluator 'eval))
+
+  (assert-error (lambda () (eval '(+ 1 2) the-global-env)) "Application should start with 'call'")
+  (assert-eq 3 (eval '(call + 1 2) the-global-env) "Failed eval '(call + 1 2)"))
+(test)
