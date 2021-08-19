@@ -122,6 +122,8 @@
           ; Not implemented.
           ((eq? m 'and?) (lambda (exp) #f))
           ((eq? m 'or?) (lambda (exp) #f))
+          ; Added by Exercise 4.4
+          ((eq? m 'make-if) make-if)
           (else
             (error "Unknown syntax" m))))
   dispatch)
