@@ -47,6 +47,9 @@
   ; Added by Exercise 4.6
   (define let? (syntax 'let?))
   (define let->combination (syntax 'let->combination))
+  ; Added by Exercise 4.7
+  (define let*? (syntax 'let*?))
+  (define let*->nested-lets (syntax 'let*->nested-lets))
 
   (define true? (environment-model 'true?))
   (define make-procedure (environment-model 'make-procedure))
@@ -75,6 +78,7 @@
            (eval-sequence (begin-actions exp) env))
           ((cond? exp) (eval (cond->if exp) env))
           ((let? exp) (eval (let->combination exp) env))
+          ((let*? exp) (eval (let*->nested-lets exp) env))
           ((and? exp) (eval-and (operands exp) env))
           ((or? exp) (eval-or (operands exp) env))
           ((application? exp)

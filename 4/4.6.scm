@@ -15,8 +15,12 @@
     (make-application (make-lambda (let-variables exp)
                                    (let-body exp))
                       (let-values exp)))
+  ; Added by Exercise 4.7
+  (define (make-let bindings body)
+    (append (list 'let bindings) body))
   (define (dispatch m)
     (cond ((eq? m 'let?) let?)
           ((eq? m 'let->combination) let->combination)
+          ((eq? m 'make-let) make-let)
           (else (syntax m))))
   dispatch)
