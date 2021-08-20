@@ -126,6 +126,12 @@
           ((eq? m 'make-if) make-if)
           ; Added by Exercise 4.5
           ((eq? m 'sequence->exp) sequence->exp)
+          ; Added by Exercise 4.6
+          ; Not implemented.
+          ((eq? m 'let?) (lambda (exp) #f))
+          ((eq? m 'let->combination) (error "let->combination not implemented."))
+          ; Added by Exercise 4.6
+          ((eq? m 'make-lambda) make-lambda)
           (else
             (error "Unknown syntax" m))))
   dispatch)

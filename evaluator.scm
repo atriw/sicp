@@ -44,6 +44,9 @@
   (define and? (syntax 'and?))
   (define or? (syntax 'or?))
   ; operands, no-operands?, first-operand, rest-operands are the same as application
+  ; Added by Exercise 4.6
+  (define let? (syntax 'let?))
+  (define let->combination (syntax 'let->combination))
 
   (define true? (environment-model 'true?))
   (define make-procedure (environment-model 'make-procedure))
@@ -71,6 +74,7 @@
           ((begin? exp)
            (eval-sequence (begin-actions exp) env))
           ((cond? exp) (eval (cond->if exp) env))
+          ((let? exp) (eval (let->combination exp) env))
           ((and? exp) (eval-and (operands exp) env))
           ((or? exp) (eval-or (operands exp) env))
           ((application? exp)
