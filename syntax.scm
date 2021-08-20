@@ -124,6 +124,8 @@
           ((eq? m 'or?) (lambda (exp) #f))
           ; Added by Exercise 4.4
           ((eq? m 'make-if) make-if)
+          ; Added by Exercise 4.5
+          ((eq? m 'sequence->exp) sequence->exp)
           (else
             (error "Unknown syntax" m))))
   dispatch)
