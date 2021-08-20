@@ -129,13 +129,15 @@
           ; Added by Exercise 4.6
           ; Not implemented.
           ((eq? m 'let?) (lambda (exp) #f))
-          ((eq? m 'let->combination) (error "let->combination not implemented."))
+          ((eq? m 'let->combination) (lambda (exp) (error "let->combination not implemented.")))
           ; Added by Exercise 4.6
           ((eq? m 'make-lambda) make-lambda)
           ; Added by Exercise 4.7
           ; Not implemented.
           ((eq? m 'let*?) (lambda (exp) #f))
-          ((eq? m 'let*->nested-lets) (error "let*->nested-lets not implemented."))
+          ((eq? m 'let*->nested-lets) (lambda (exp) (error "let*->nested-lets not implemented.")))
+          ; Added by Exercise 4.8
+          ((eq? m 'make-begin) make-begin)
           (else
             (error "Unknown syntax" m))))
   dispatch)
