@@ -138,6 +138,8 @@
           ((eq? m 'let*->nested-lets) (lambda (exp) (error "let*->nested-lets not implemented.")))
           ; Added by Exercise 4.8
           ((eq? m 'make-begin) make-begin)
+          ; Added by Exercise 4.16
+          ((eq? m 'make-quote) (lambda (text) (list 'quote text)))
           (else
             (error "Unknown syntax" m))))
   dispatch)
