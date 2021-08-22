@@ -11,6 +11,7 @@
   (define test-suite
     (setup-test
       new-syntax
+      '()
       (lambda (evaluator syntax env-model)
         (let ((impl (make-impl evaluator syntax env-model)))
           ((evaluator 'implement-eval-and) (car impl))

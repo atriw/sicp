@@ -4,7 +4,7 @@
 
 (define (test)
   (define test-suite
-    (setup-test new-syntax '()))
+    (setup-test new-syntax '() '()))
   (define (test-fn eval env)
     (eval '(define (fib n)
              (let fib-iter ((a 1)

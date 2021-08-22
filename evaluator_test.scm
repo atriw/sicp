@@ -36,12 +36,16 @@
 
 (define (setup-test
           modify-syntax ; lambda (syntax) -> syntax
+          modify-env-model; lambda (env-model) -> env-model
           mock) ; lambda (evaluator syntax env-model) -> ()
   (define syntax
     (if (not (null? modify-syntax))
       (modify-syntax (make-syntax))
       (make-syntax)))
-  (define env-model (make-environment-model))
+  (define env-model
+    (if (not (null? modify-env-model))
+      (modify-env-model (make-environment-model))
+      (make-environment-model)))
   (define env (setup-environment env-model))
   (define evaluator (make-evaluator syntax env-model))
   (define eval (evaluator 'eval))
