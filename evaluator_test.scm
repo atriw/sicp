@@ -1,6 +1,7 @@
 (load "evaluator.scm")
 (load "syntax.scm")
 (load "environment.scm")
+(load "integral-evaluator.scm")
 
 (define (make-driver-loop evaluator environment-model)
   (define input-prompt ";;; M-Eval input:")
@@ -35,9 +36,26 @@
         (loop)))))
 
 (define (setup-test
-          modify-syntax ; lambda (syntax) -> syntax
-          modify-env-model; lambda (env-model) -> env-model
-          mock) ; lambda (evaluator syntax env-model) -> ()
+          modify-syntax
+          modify-env-model
+          mock)
+  (setup-test-internal make-evaluator
+                       modify-syntax
+                       modify-env-model
+                       mock))
+(define (setup-integral-test
+          modify-syntax
+          modify-env-model
+          mock)
+  (setup-test-internal make-integral-evaluator
+                       modify-syntax
+                       modify-env-model
+                       mock))
+
+(define (setup-test-internal make-evaluator
+                             modify-syntax ; lambda (syntax) -> syntax
+                             modify-env-model; lambda (env-model) -> env-model
+                             mock) ; lambda (evaluator syntax env-model) -> ()
   (define syntax
     (if (not (null? modify-syntax))
       (modify-syntax (make-syntax))
