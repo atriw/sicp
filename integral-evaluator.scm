@@ -103,7 +103,7 @@
     (let ((vars (lambda-parameters exp))
           (bproc (analyze-sequence (lambda-body exp))))
       (lambda (env) (make-procedure vars bproc env))))
-  (define (analyze-sequence exp)
+  (define (analyze-sequence exps)
     (define (sequentially proc1 proc2)
       (lambda (env) (proc1 env) (proc2 env)))
     (define (loop first-proc rest-procs)
