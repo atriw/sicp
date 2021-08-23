@@ -140,6 +140,9 @@
           ((eq? m 'make-begin) make-begin)
           ; Added by Exercise 4.16
           ((eq? m 'make-quote) (lambda (text) (list 'quote text)))
+          ; Added by Exercise 4.20
+          ((eq? m 'letrec?) (lambda (exp) #f))
+          ((eq? m 'letrec->combination) (lambda (exp) (error "letrec->combination not implemented.")))
           (else
             (error "Unknown syntax" m))))
   dispatch)
