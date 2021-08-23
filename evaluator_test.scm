@@ -3,9 +3,15 @@
 (load "environment.scm")
 (load "integral-evaluator.scm")
 
-(define (make-driver-loop evaluator environment-model)
-  (define input-prompt ";;; M-Eval input:")
-  (define output-prompt ";;; M-Eval value:")
+(define (make-driver-loop evaluator environment-model lazy?)
+  (define input-prompt
+    (if lazy?
+      ";;; L-Eval input:"
+      ";;; M-Eval input:"))
+  (define output-prompt
+    (if lazy?
+      ";;; L-Eval value:"
+      ";;; M-Eval value:"))
   (define (prompt-for-input string)
     (newline) (newline) (display string) (newline))
   (define (announce-output string)
@@ -29,10 +35,15 @@
   driver-loop)
 
 (define (start)
+  (start-option-lazy #f))
+(define (start-lazy)
+  (start-option-lazy #t))
+(define (start-option-lazy lazy?)
   (let ((env-model (make-environment-model))
         (syntax (make-syntax)))
     (let ((evaluator (make-evaluator syntax env-model)))
-      (let ((loop (make-driver-loop evaluator env-model)))
+      (if lazy? ((evaluator 'switch-normal-order) #t))
+      (let ((loop (make-driver-loop evaluator env-model lazy?)))
         (loop)))))
 
 (define (setup-test
