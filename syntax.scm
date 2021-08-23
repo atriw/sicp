@@ -143,6 +143,11 @@
           ; Added by Exercise 4.20
           ((eq? m 'letrec?) (lambda (exp) #f))
           ((eq? m 'letrec->combination) (lambda (exp) (error "letrec->combination not implemented.")))
+          ; Added by Exercise 4.24
+          ((eq? m 'not?) (lambda (exp) #f))
+          ((eq? m 'not->if) (lambda (exp) (error "not->if not implemented.")))
+          ((eq? m 'and->if) (lambda (exp) (error "and->if not implemented.")))
+          ((eq? m 'or->if) (lambda (exp) (error "or->if not implemented.")))
           (else
             (error "Unknown syntax" m))))
   dispatch)

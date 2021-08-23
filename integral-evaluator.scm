@@ -43,6 +43,12 @@
   ; Added by Exercise 4.22
   (define let? (syntax 'let?))
   (define let->combination (syntax 'let->combination))
+  (define and? (syntax 'and?))
+  (define or? (syntax 'or?))
+  (define not? (syntax 'not?))
+  (define and->if (syntax 'and->if))
+  (define or->if (syntax 'or->if))
+  (define not->if (syntax 'not->if))
 
   (define true? (environment-model 'true?))
   (define make-procedure (environment-model 'make-procedure))
@@ -70,6 +76,9 @@
           ((begin? exp) (analyze-sequence (begin-actions exp)))
           ((let? exp) (analyze (let->combination exp)))
           ((cond? exp) (analyze (cond->if exp)))
+          ((and? exp) (analyze (and->if (operands exp))))
+          ((or? exp) (analyze (or->if (operands exp))))
+          ((not? exp) (analyze (not->if exp)))
           ((application? exp) (analyze-application exp))
           (else
             (error "Unknown expression type: ANALYZE" exp))))
@@ -115,6 +124,7 @@
       (if (null? procs) (error "Empty sequence: ANALYZE"))
       ; (fold-left sequentially (car procs) (cdr procs))))
       (loop (car procs) (cdr procs))))
+
   (define (analyze-application exp)
     (let ((fproc (analyze (operator exp)))
           (aprocs (map analyze (operands exp))))

@@ -53,6 +53,9 @@
   ; Added by Exercise 4.20
   (define letrec? (syntax 'letrec?))
   (define letrec->combination (syntax 'letrec->combination))
+  ; Added by Exercise 4.24
+  (define not? (syntax 'not?))
+  (define not->if (syntax 'not->if))
 
   (define true? (environment-model 'true?))
   (define make-procedure (environment-model 'make-procedure))
@@ -85,6 +88,7 @@
           ((letrec? exp) (eval (letrec->combination exp) env))
           ((and? exp) (eval-and (operands exp) env))
           ((or? exp) (eval-or (operands exp) env))
+          ((not? exp) (eval (not->if exp) env))
           ((application? exp)
            (apply (eval (operator exp) env)
                   (list-of-values (operands exp) env)))

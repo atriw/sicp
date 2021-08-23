@@ -1,5 +1,6 @@
 (load "test.scm")
 (load "2/2.42.scm")
+(load "debug.scm")
 
 (define (test)
   (let ((want-1 (list (list (make-position 1 1))))
@@ -14,3 +15,16 @@
            (assert-eq want-4 (queens 4) "Failed queens 4")
            (assert-eq want-8 (length (queens 8)) "Failed queens 8"))))
 (test)
+
+(define (benchmark)
+  (display "Benchmark queens 4")
+  (with-print-time queens 4)
+  (display "Benchmark queens 5")
+  (with-print-time queens 5)
+  (display "Benchmark queens 6")
+  (with-print-time queens 6)
+  (display "Benchmark queens 7")
+  (with-print-time queens 7)
+  (display "Benchmark queens 8")
+  (with-print-time queens 8))
+(benchmark)
