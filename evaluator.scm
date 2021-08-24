@@ -90,12 +90,16 @@
           ((or? exp) (eval-or (operands exp) env))
           ((not? exp) (eval (not->if exp) env))
           ((application? exp)
-           (if normal-order?
-             (apply-normal-order (actual-value (operator exp) env)
-                                 (operands exp)
-                                 env)
-             (apply (eval (operator exp) env)
-                    (list-of-values (operands exp) env))))
+           (cond ((and normal-order? (not extent-normal-order?))
+                  (apply-normal-order (actual-value (operator exp) env)
+                                      (operands exp)
+                                      env))
+                 ((and normal-order? extent-normal-order?)
+                  (apply-normal-order-extent (actual-value (operator exp) env)
+                                             (operands exp)
+                                             env))
+                 (else (apply (eval (operator exp) env)
+                              (list-of-values (operands exp) env)))))
           (else
             (error "Unknown expression type: EVAL" exp))))
   (define (apply procedure arguments)
@@ -116,7 +120,7 @@
       (cons (eval (first-operand exps) env)
             (list-of-values (rest-operands exps) env))))
   (define (eval-if exp env)
-    (if (true? ((select-by-order eval actual-value) (if-predicate exp) env))
+    (if (true? (actual-value (if-predicate exp) env))
       (eval (if-consequent exp) env)
       (eval (if-alternative exp) env)))
   (define (eval-sequence exps env)
@@ -139,10 +143,6 @@
 
   ; Delay evaluation implementation
   (define normal-order? #f)
-  (define (select-by-order applicative normal)
-    (if normal-order?
-      normal
-      applicative))
   (define (switch-normal-order switch) (set! normal-order? switch))
 
   (define (actual-value exp env)
@@ -157,6 +157,7 @@
              (set-cdr! (cdr obj)
                        '())
              result))
+          ((not-memoized-thunk? obj) (actual-value (thunk-exp obj) (thunk-env obj)))
           ((evaluated-thunk? obj) (thunk-value obj))
           (else obj)))
   (define (tagged-list? exp tag)
@@ -165,6 +166,8 @@
       #f))
   (define (delay-it exp env)
     (list 'thunk exp env))
+  (define (delay-it-not-memoized exp env)
+    (list 'not-memoized-thunk exp env))
   (define (thunk? obj)
     (tagged-list? obj 'thunk))
   (define (thunk-exp thunk) (cadr thunk))
@@ -173,6 +176,8 @@
     (tagged-list? obj 'evaluated-thunk))
   (define (thunk-value evaluated-thunk)
     (cadr evaluated-thunk))
+  (define (not-memoized-thunk? obj)
+    (tagged-list? obj 'not-memoized-thunk))
 
   (define (apply-normal-order procedure arguments env)
     (cond ((primitive-procedure? procedure)
@@ -203,6 +208,43 @@
             (list-of-delayed-args (rest-operands exps)
                                   env))))
 
+  ; Selective delayed and memoized arguments
+  (define extent-normal-order? #f)
+  (define (switch-extent-normal-order switch) (set! extent-normal-order? switch))
+  (define (parameter-delayed? p)
+    (and (pair? p) (eq? (cadr p) 'delay)))
+  (define (parameter-delayed-memo? p)
+    (and (pair? p) (eq? (cadr p) 'delay-memo)))
+  (define (actual-parameter p)
+    (if (pair? p)
+      (car p)
+      p))
+  (define (apply-normal-order-extent procedure arguments env)
+    (define (list-of-args-by-param-types params args env)
+      (if (no-operands? args)
+        '()
+        (let ((rest (list-of-args-by-param-types (rest-operands params) (rest-operands args) env))
+              (first-param (first-operand params))
+              (first-arg (first-operand args)))
+          (cond ((parameter-delayed? first-param)
+                 (cons (delay-it-not-memoized first-arg env) rest))
+                ((parameter-delayed-memo? first-param)
+                 (cons (delay-it first-arg env) rest))
+                (else
+                  (cons (actual-value first-arg env) rest))))))
+    (cond ((primitive-procedure? procedure)
+           (apply-primitive-procedure
+             procedure
+             (list-of-arg-values arguments env)))
+          ((compound-procedure? procedure)
+           (eval-sequence
+             (procedure-body procedure)
+             (extend-environment
+               (map actual-parameter (procedure-parameters procedure))
+               (list-of-args-by-param-types (procedure-parameters procedure) arguments env)
+               (procedure-environment procedure))))
+          (else
+            (error "Unknown procedure type: APPLY" procedure))))
 
   ; Added by Exercise 4.4
   (define (eval-and exps env) (error "Not implemented: EVAL-AND"))
@@ -210,11 +252,12 @@
   (define (implement-eval-and impl) (set! eval-and impl))
   (define (implement-eval-or impl) (set! eval-or impl))
   (define (dispatch m)
-    (cond ((eq? m 'eval) (select-by-order eval actual-value))
+    (cond ((eq? m 'eval) actual-value)
           ((eq? m 'mock-list-of-values) mock-list-of-values)
           ((eq? m 'implement-eval-and) implement-eval-and)
           ((eq? m 'implement-eval-or) implement-eval-or)
           ((eq? m 'switch-normal-order) switch-normal-order)
+          ((eq? m 'switch-extent-normal-order) switch-extent-normal-order)
           (else
             (error "Unknown operation" m))))
   dispatch)

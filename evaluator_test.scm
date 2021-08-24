@@ -3,15 +3,15 @@
 (load "environment.scm")
 (load "integral-evaluator.scm")
 
-(define (make-driver-loop evaluator environment-model lazy?)
+(define (make-driver-loop evaluator environment-model lazy? extent?)
   (define input-prompt
-    (if lazy?
-      ";;; L-Eval input:"
-      ";;; M-Eval input:"))
+    (cond ((and lazy? (not extent?))  ";;; L-Eval input:")
+          ((and lazy? extent?) ";;; L-E-Eval input:")
+          (else ";;; M-Eval input:")))
   (define output-prompt
-    (if lazy?
-      ";;; L-Eval value:"
-      ";;; M-Eval value:"))
+    (cond ((and lazy? (not extent?))  ";;; L-Eval value:")
+          ((and lazy? extent?) ";;; L-E-Eval value:")
+          (else ";;; M-Eval value:")))
   (define (prompt-for-input string)
     (newline) (newline) (display string) (newline))
   (define (announce-output string)
@@ -26,24 +26,32 @@
   (define eval (evaluator 'eval))
   (define the-global-environment (setup-environment environment-model))
   (define (driver-loop)
+    (define quit? #f)
     (prompt-for-input input-prompt)
     (let ((input (read)))
-      (let ((output (eval input the-global-environment)))
-        (announce-output output-prompt)
-        (user-print output)))
-    (driver-loop))
+      (if (equal? input '(EXIT))
+        (begin (set! quit? #t) 'quit)
+        (let ((output (eval input the-global-environment)))
+          (announce-output output-prompt)
+          (user-print output))))
+    (if quit?
+      'quit
+      (driver-loop)))
   driver-loop)
 
 (define (start)
-  (start-option-lazy #f))
+  (start-option #f #f))
 (define (start-lazy)
-  (start-option-lazy #t))
-(define (start-option-lazy lazy?)
+  (start-option #t #f))
+(define (start-lazy-extent)
+  (start-option #t #t))
+(define (start-option lazy? extent?)
   (let ((env-model (make-environment-model))
         (syntax (make-syntax)))
     (let ((evaluator (make-evaluator syntax env-model)))
       (if lazy? ((evaluator 'switch-normal-order) #t))
-      (let ((loop (make-driver-loop evaluator env-model lazy?)))
+      (if extent? ((evaluator 'switch-extent-normal-order) #t))
+      (let ((loop (make-driver-loop evaluator env-model lazy? extent?)))
         (loop)))))
 
 (define (setup-test
