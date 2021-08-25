@@ -1,4 +1,4 @@
-(define (make-integral-evaluator syntax environment-model)
+(define (make-analyzing-evaluator syntax environment-model)
   ; exp ::= self-evaluating
   ;         | variable
   ;         | quote

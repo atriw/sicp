@@ -15,7 +15,7 @@
           ((evaluator 'implement-eval-and) (car impl))
           ((evaluator 'implement-eval-or) (cdr impl))))))
   (define s2
-    (setup-integral-test (lambda (syntax) (new-derived-and-or-syntax (new-syntax syntax))) '() '()))
+    (setup-analyzing-test (lambda (syntax) (new-derived-and-or-syntax (new-syntax syntax))) '() '()))
   (cons s1 s2))
 
 (define (benchmark)

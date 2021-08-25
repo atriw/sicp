@@ -1,7 +1,7 @@
 (load "evaluator.scm")
 (load "syntax.scm")
 (load "environment.scm")
-(load "integral-evaluator.scm")
+(load "analyzing-evaluator.scm")
 (load "amb-evaluator.scm")
 
 (define (make-driver-loop evaluator environment-model lazy? extent?)
@@ -112,11 +112,11 @@
                        modify-syntax
                        modify-env-model
                        mock))
-(define (setup-integral-test
+(define (setup-test-analyzing
           modify-syntax
           modify-env-model
           mock)
-  (setup-test-internal make-integral-evaluator
+  (setup-test-internal make-analyzing-evaluator
                        modify-syntax
                        modify-env-model
                        mock))
