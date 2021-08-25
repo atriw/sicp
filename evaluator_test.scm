@@ -2,6 +2,7 @@
 (load "syntax.scm")
 (load "environment.scm")
 (load "integral-evaluator.scm")
+(load "amb-evaluator.scm")
 
 (define (make-driver-loop evaluator environment-model lazy? extent?)
   (define input-prompt
@@ -39,6 +40,48 @@
       (driver-loop)))
   driver-loop)
 
+(define (make-amb-driver-loop evaluator environment-model)
+  (define input-prompt ";;; Amb-Eval input:")
+  (define output-prompt ";;; Amb-Eval value:")
+  (define (prompt-for-input string)
+    (newline) (newline) (display string) (newline))
+  (define (announce-output string)
+    (newline) (display string) (newline))
+  (define (user-print object)
+    (if ((environment-model 'compound-procedure?) object)
+      (display (list 'compound-procedure
+                     ((environment-model 'procedure-parameters) object)
+                     ((environment-model 'procedure-body) object)
+                     '<procedure-env>))
+      (display object)))
+  (define ambeval (evaluator 'ambeval))
+  (define the-global-environment (setup-environment environment-model))
+  (define (driver-loop)
+    (define (internal-loop try-again)
+      (prompt-for-input input-prompt)
+      (let ((input (read)))
+        (if (eq? input 'try-again)
+          (try-again)
+          (begin
+            (newline) (display ";;; Starting a new problem ")
+            (ambeval
+              input
+              the-global-environment
+              (lambda (val next-alternative)
+                (announce-output output-prompt)
+                (user-print val)
+                (internal-loop next-alternative))
+              (lambda ()
+                (announce-output
+                  ";;; There are no more values of")
+                (user-print input)
+                (driver-loop)))))))
+    (internal-loop
+      (lambda ()
+        (newline) (display ";;; There is no current problem")
+        (driver-loop))))
+  driver-loop)
+
 (define (start)
   (start-option #f #f))
 (define (start-lazy)
@@ -52,6 +95,13 @@
       (if lazy? ((evaluator 'switch-normal-order) #t))
       (if extent? ((evaluator 'switch-extent-normal-order) #t))
       (let ((loop (make-driver-loop evaluator env-model lazy? extent?)))
+        (loop)))))
+
+(define (start-amb)
+  (let ((env-model (make-environment-model))
+        (syntax (make-syntax)))
+    (let ((evaluator (make-amb-evaluator syntax env-model)))
+      (let ((loop (make-amb-driver-loop evaluator env-model)))
         (loop)))))
 
 (define (setup-test
@@ -70,6 +120,17 @@
                        modify-syntax
                        modify-env-model
                        mock))
+(define (setup-test-amb
+          modify-syntax
+          modify-env-model
+          mock)
+  (let ((suite (setup-test-internal make-amb-evaluator
+                                    modify-syntax
+                                    modify-env-model
+                                    mock)))
+    (suite (lambda (eval env)
+             (eval '(define (require p) (if (not p) (amb))) env)))
+    suite))
 
 (define (setup-test-internal make-evaluator
                              modify-syntax ; lambda (syntax) -> syntax
