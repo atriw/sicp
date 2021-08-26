@@ -133,6 +133,11 @@
                                     'ambeval)))
     (suite (lambda (ambeval env)
              (ambeval '(define (require p) (if (not p) (amb))) env nop-succeed nop-fail)
+             (ambeval '(define (distinct? items)
+                         (cond ((null? items) true)
+                               ((null? (cdr items)) true)
+                               ((member (car items) (cdr items)) false)
+                               (else (distinct? (cdr items))))) env nop-succeed nop-fail)
              (ambeval '(define (an-integer-starting-from n)
                          (amb n (an-integer-starting-from (+ n 1)))) env nop-succeed nop-fail)))
     suite))
@@ -168,3 +173,9 @@
   (lambda (val fail) val))
 (define nop-fail
   (lambda () 'fail))
+
+(define (drain-amb ambeval exp env)
+  (ambeval exp env
+           (lambda (val fail)
+             (+ 1 (fail)))
+           (lambda () 0)))
