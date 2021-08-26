@@ -132,7 +132,9 @@
                                     mock
                                     'ambeval)))
     (suite (lambda (ambeval env)
-             (ambeval '(define (require p) (if (not p) (amb))) env nop-succeed nop-fail)))
+             (ambeval '(define (require p) (if (not p) (amb))) env nop-succeed nop-fail)
+             (ambeval '(define (an-integer-starting-from n)
+                         (amb n (an-integer-starting-from (+ n 1)))) env nop-succeed nop-fail)))
     suite))
 
 (define (setup-test-internal make-evaluator
