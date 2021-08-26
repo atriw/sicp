@@ -105,6 +105,7 @@
           (list 'append append)
           (list 'abs abs)
           (list 'list-ref list-ref)
+          (list 'eq? eq?)
           (list 'equal? equal?)
           (list 'member member)
           (list '> >)
