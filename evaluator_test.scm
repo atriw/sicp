@@ -111,7 +111,8 @@
   (setup-test-internal make-evaluator
                        modify-syntax
                        modify-env-model
-                       mock))
+                       mock
+                       'eval))
 (define (setup-test-analyzing
           modify-syntax
           modify-env-model
@@ -119,7 +120,8 @@
   (setup-test-internal make-analyzing-evaluator
                        modify-syntax
                        modify-env-model
-                       mock))
+                       mock
+                       'eval))
 (define (setup-test-amb
           modify-syntax
           modify-env-model
@@ -127,15 +129,17 @@
   (let ((suite (setup-test-internal make-amb-evaluator
                                     modify-syntax
                                     modify-env-model
-                                    mock)))
-    (suite (lambda (eval env)
-             (eval '(define (require p) (if (not p) (amb))) env)))
+                                    mock
+                                    'ambeval)))
+    (suite (lambda (ambeval env)
+             (ambeval '(define (require p) (if (not p) (amb))) env nop-succeed nop-fail)))
     suite))
 
 (define (setup-test-internal make-evaluator
                              modify-syntax ; lambda (syntax) -> syntax
                              modify-env-model; lambda (env-model) -> env-model
-                             mock) ; lambda (evaluator syntax env-model) -> ()
+                             mock ; lambda (evaluator syntax env-model) -> ()
+                             eval-symbol)
   (define syntax
     (if (not (null? modify-syntax))
       (modify-syntax (make-syntax))
@@ -146,8 +150,19 @@
       (make-environment-model)))
   (define env (setup-environment env-model))
   (define evaluator (make-evaluator syntax env-model))
-  (define eval (evaluator 'eval))
+  (define eval (evaluator eval-symbol))
   (define (test fn) ; fn: lambda (eval env) -> ()
     (fn eval env))
   (if (not (null? mock)) (mock evaluator syntax env-model))
   test)
+
+(define (amb->stream ambeval exp env)
+  (ambeval exp env
+           (lambda (val fail)
+             (cons-stream val (fail)))
+           (lambda () '())))
+
+(define nop-succeed
+  (lambda (val fail) val))
+(define nop-fail
+  (lambda () 'fail))
