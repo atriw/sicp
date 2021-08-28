@@ -49,6 +49,8 @@
   (define and->if (syntax 'and->if))
   (define or->if (syntax 'or->if))
   (define not->if (syntax 'not->if))
+  ; Added by Exercise 4.51
+  (define permanent-assignment? (syntax 'permanent-assignment?))
 
   (define true? (environment-model 'true?))
   (define make-procedure (environment-model 'make-procedure))
@@ -79,6 +81,7 @@
           ((variable? exp) (analyze-variable exp))
           ((quoted? exp) (analyze-quoted exp))
           ((assignment? exp) (analyze-assignment exp))
+          ((permanent-assignment? exp) (analyze-permanent-assignment exp))
           ((definition? exp) (analyze-definition exp))
           ((if? exp) (analyze-if exp))
           ((lambda? exp) (analyze-lambda exp))
@@ -227,8 +230,16 @@
       (let ((item (list-ref lst (random (length lst)))))
         (cons item (shuffle (delete item lst))))))
 
+  ; Added by Exercise 4.51
+  (define (analyze-permanent-assignment _)
+    (error "analyze-permanent-assignment not implemented."))
+  (define (implement-analyze-permanent-assignment proc)
+    (set! analyze-permanent-assignment proc))
+
   (define (dispatch m)
     (cond ((eq? m 'ambeval) ambeval)
+          ((eq? m 'analyze) analyze)
+          ((eq? m 'implement-analyze-permanent-assignment) implement-analyze-permanent-assignment)
           (else
             (error "Unknown operation" m))))
   dispatch)

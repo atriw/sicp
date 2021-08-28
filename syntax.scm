@@ -148,6 +148,8 @@
           ((eq? m 'not->if) (lambda (exp) (error "not->if not implemented.")))
           ((eq? m 'and->if) (lambda (exp) (error "and->if not implemented.")))
           ((eq? m 'or->if) (lambda (exp) (error "or->if not implemented.")))
+          ; Added by Exercise 4.51
+          ((eq? m 'permanent-assignment?) (lambda (exp) #f))
           (else
             (error "Unknown syntax" m))))
   dispatch)
