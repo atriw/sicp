@@ -7,6 +7,8 @@
 (load "parse-sentence-predefines.scm")
 (load "4/4.4.scm") ; and or not syntax
 (load "4/4.6.scm") ; let syntax
+(load "4/4.51.scm") ; permanent-set!
+(load "4/4.52.scm") ; if-fail
 
 (define (make-driver-loop evaluator environment-model lazy? extent?)
   (define input-prompt
@@ -104,9 +106,16 @@
         (loop)))))
 
 (define (start-amb)
+  (define syntaxs
+    (list new-permanent-assignment-syntax
+          new-if-fail-syntax
+          new-derived-and-or-syntax
+          new-syntax))
   (let ((env-model (make-environment-model))
-        (syntax (new-derived-and-or-syntax (new-syntax (make-syntax)))))
+        (syntax (fold-right (lambda (cur acc) (cur acc)) (make-syntax) syntaxs)))
     (let ((evaluator (make-amb-evaluator syntax env-model)))
+      (implement-analyze-permanent-assignment evaluator syntax env-model)
+      (implement-analyze-if-fail evaluator syntax env-model)
       (let ((loop (make-amb-driver-loop evaluator env-model)))
         (loop)))))
 
@@ -160,3 +169,15 @@
     (fn eval env))
   (if (not (null? mock)) (mock evaluator syntax env-model))
   test)
+
+(define full-feature-amb-suite
+  (setup-test-amb
+    (lambda (syntax)
+      (new-if-fail-syntax
+        (new-permanent-assignment-syntax
+          (new-derived-and-or-syntax
+            (new-syntax syntax)))))
+    '()
+    (lambda (evaluator syntax env-model)
+      (implement-analyze-permanent-assignment evaluator syntax env-model)
+      (implement-analyze-if-fail evaluator syntax env-model))))
