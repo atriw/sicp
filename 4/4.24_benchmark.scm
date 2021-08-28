@@ -15,7 +15,7 @@
           ((evaluator 'implement-eval-and) (car impl))
           ((evaluator 'implement-eval-or) (cdr impl))))))
   (define s2
-    (setup-analyzing-test (lambda (syntax) (new-derived-and-or-syntax (new-syntax syntax))) '() '()))
+    (setup-test-analyzing (lambda (syntax) (new-derived-and-or-syntax (new-syntax syntax))) '() '()))
   (cons s1 s2))
 
 (define (benchmark)
@@ -33,7 +33,7 @@
     (s1 bench-fn1)
     (newline) (display "queens 7 workload") (newline)
     (s1 bench-fn2)
-    (newline) (display "Benchmark integral evaluator") (newline)
+    (newline) (display "Benchmark analyzing evaluator") (newline)
     (newline) (display "Fibonacci 20 workload") (newline)
     (s2 bench-fn1)
     (newline) (display "queens 7 workload") (newline)
@@ -51,7 +51,7 @@
 ; Applying #[compound-procedure 12 eval]
 ; Run time: 17.46s, GC time: .06s, Real time: 17.523s.
 ;
-; Benchmark integral evaluator
+; Benchmark analyzing evaluator
 ;
 ; Fibonacci 20 workload
 ;
