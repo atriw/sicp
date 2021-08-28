@@ -3,6 +3,7 @@
 (load "environment.scm")
 (load "analyzing-evaluator.scm")
 (load "amb-evaluator.scm")
+(load "amb-predefines.scm")
 
 (define (make-driver-loop evaluator environment-model lazy? extent?)
   (define input-prompt
@@ -174,20 +175,3 @@
     (fn eval env))
   (if (not (null? mock)) (mock evaluator syntax env-model))
   test)
-
-(define (amb->stream ambeval exp env)
-  (ambeval exp env
-           (lambda (val fail)
-             (cons-stream val (fail)))
-           (lambda () '())))
-
-(define nop-succeed
-  (lambda (val fail) val))
-(define nop-fail
-  (lambda () 'fail))
-
-(define (drain-amb ambeval exp env)
-  (ambeval exp env
-           (lambda (val fail)
-             (+ 1 (fail)))
-           (lambda () 0)))
