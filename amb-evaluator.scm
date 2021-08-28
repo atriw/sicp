@@ -51,6 +51,8 @@
   (define not->if (syntax 'not->if))
   ; Added by Exercise 4.51
   (define permanent-assignment? (syntax 'permanent-assignment?))
+  ; Added by Exercise 4.52
+  (define if-fail? (syntax 'if-fail?))
 
   (define true? (environment-model 'true?))
   (define make-procedure (environment-model 'make-procedure))
@@ -84,6 +86,7 @@
           ((permanent-assignment? exp) (analyze-permanent-assignment exp))
           ((definition? exp) (analyze-definition exp))
           ((if? exp) (analyze-if exp))
+          ((if-fail? exp) (analyze-if-fail exp))
           ((lambda? exp) (analyze-lambda exp))
           ((begin? exp) (analyze-sequence (begin-actions exp)))
           ((let? exp) (analyze (let->combination exp)))
@@ -235,11 +238,16 @@
     (error "analyze-permanent-assignment not implemented."))
   (define (implement-analyze-permanent-assignment proc)
     (set! analyze-permanent-assignment proc))
+  (define (analyze-if-fail _)
+    (error "analyze-if-fail not implemented."))
+  (define (implement-analyze-if-fail proc)
+    (set! analyze-if-fail proc))
 
   (define (dispatch m)
     (cond ((eq? m 'ambeval) ambeval)
           ((eq? m 'analyze) analyze)
           ((eq? m 'implement-analyze-permanent-assignment) implement-analyze-permanent-assignment)
+          ((eq? m 'implement-analyze-if-fail) implement-analyze-if-fail)
           (else
             (error "Unknown operation" m))))
   dispatch)
