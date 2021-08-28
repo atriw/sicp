@@ -4,6 +4,9 @@
 (load "analyzing-evaluator.scm")
 (load "amb-evaluator.scm")
 (load "amb-predefines.scm")
+(load "parse-sentence-predefines.scm")
+(load "4/4.4.scm") ; and or not syntax
+(load "4/4.6.scm") ; let syntax
 
 (define (make-driver-loop evaluator environment-model lazy? extent?)
   (define input-prompt
@@ -81,6 +84,8 @@
       (lambda ()
         (newline) (display ";;; There is no current problem")
         (driver-loop))))
+  (amb-predefines ambeval the-global-environment)
+  (define-parse-sentence ambeval the-global-environment)
   driver-loop)
 
 (define (start)
@@ -100,7 +105,7 @@
 
 (define (start-amb)
   (let ((env-model (make-environment-model))
-        (syntax (make-syntax)))
+        (syntax (new-derived-and-or-syntax (new-syntax (make-syntax)))))
     (let ((evaluator (make-amb-evaluator syntax env-model)))
       (let ((loop (make-amb-driver-loop evaluator env-model)))
         (loop)))))
@@ -132,27 +137,7 @@
                                     modify-env-model
                                     mock
                                     'ambeval)))
-    (suite (lambda (ambeval env)
-             (ambeval '(define (require p) (if (not p) (amb))) env nop-succeed nop-fail)
-             (ambeval '(define (map proc sequence)
-                         (if (null? sequence)
-                           '()
-                           (cons (proc (car sequence)) (map proc (cdr sequence))))) env nop-succeed nop-fail)
-             (ambeval '(define (enumerate-interval low high)
-                         (if (> low high)
-                           '()
-                           (cons low (enumerate-interval (+ 1 low) high)))) env nop-succeed nop-fail)
-             (ambeval '(define (accumulate op init sequence)
-                         (if (null? sequence)
-                           init
-                           (accumulate op (op (car sequence) init) (cdr sequence)))) env nop-succeed nop-fail)
-             (ambeval '(define (distinct? items)
-                         (cond ((null? items) true)
-                               ((null? (cdr items)) true)
-                               ((member (car items) (cdr items)) false)
-                               (else (distinct? (cdr items))))) env nop-succeed nop-fail)
-             (ambeval '(define (an-integer-starting-from n)
-                         (amb n (an-integer-starting-from (+ n 1)))) env nop-succeed nop-fail)))
+    (suite amb-predefines)
     suite))
 
 (define (setup-test-internal make-evaluator

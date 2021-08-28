@@ -108,6 +108,7 @@
           (list 'eq? eq?)
           (list 'equal? equal?)
           (list 'member member)
+          (list 'memq memq)
           (list '> >)
           (list '< <)
           (list '= =)
