@@ -69,6 +69,7 @@
       #f))
   (define (amb? exp) (tagged-list? exp 'amb))
   (define (amb-choices exp) (cdr exp))
+  (define (ramb? exp) (tagged-list? exp 'ramb))
 
   (define (ambeval exp env succeed fail)
     ((analyze exp) env succeed fail))
@@ -88,6 +89,7 @@
           ((or? exp) (analyze (or->if (operands exp))))
           ((not? exp) (analyze (not->if exp)))
           ((amb? exp) (analyze-amb exp))
+          ((ramb? exp) (analyze-ramb exp))
           ((application? exp) (analyze-application exp))
           (else
             (error "Unknown expression type: ANALYZE" exp))))
@@ -208,6 +210,22 @@
              succeed
              (lambda () (try-next (cdr choices))))))
         (try-next cprocs))))
+  (define (analyze-ramb exp)
+    (let ((cprocs (map analyze (amb-choices exp))))
+      (lambda (env succeed fail)
+        (define (try-next choices)
+          (if (null? choices)
+            (fail)
+            ((car choices)
+             env
+             succeed
+             (lambda () (try-next (cdr choices))))))
+        (try-next (shuffle cprocs)))))
+  (define (shuffle lst)
+    (if (< (length lst) 2)
+      lst
+      (let ((item (list-ref lst (random (length lst)))))
+        (cons item (shuffle (delete item lst))))))
 
   (define (dispatch m)
     (cond ((eq? m 'ambeval) ambeval)
