@@ -1,4 +1,4 @@
-(define (new-syntax syntax)
+(define (new-named-let-syntax syntax)
   (define (tagged-list? exp tag)
     (if (pair? exp)
       (eq? (car exp) tag)

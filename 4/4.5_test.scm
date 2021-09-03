@@ -4,7 +4,7 @@
 
 (define (test)
   (define test-suite
-    (setup-test new-syntax '() '()))
+    (setup-test new-cond-if-syntax '() '()))
   (define (test-fn eval env)
     (assert-eq 4
                (eval '(cond (false 1)

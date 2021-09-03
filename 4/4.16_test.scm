@@ -5,8 +5,8 @@
 
 (define (test)
   (define test-suite
-    (setup-test new-syntax
-                (lambda (env-model) (new-environment-model env-model (new-syntax (make-syntax))))
+    (setup-test new-let-syntax
+                (lambda (env-model) (new-environment-model env-model (new-let-syntax (make-syntax))))
                 '()))
   (define (test-fn eval env)
     (let ((f1 '(define (f1 x)

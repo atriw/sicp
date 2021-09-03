@@ -8,14 +8,14 @@
 (define (setup)
   (define s1
     (setup-test
-      (lambda (syntax) (new-derived-and-or-syntax (new-syntax syntax)))
+      (lambda (syntax) (new-derived-and-or-syntax (new-let-syntax syntax)))
       '()
       (lambda (evaluator syntax env-model)
         (let ((impl (make-derived-and-or-implementation evaluator syntax env-model)))
           ((evaluator 'implement-eval-and) (car impl))
           ((evaluator 'implement-eval-or) (cdr impl))))))
   (define s2
-    (setup-test-analyzing (lambda (syntax) (new-derived-and-or-syntax (new-syntax syntax))) '() '()))
+    (setup-test-analyzing (lambda (syntax) (new-derived-and-or-syntax (new-let-syntax syntax))) '() '()))
   (cons s1 s2))
 
 (define (benchmark)

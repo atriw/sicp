@@ -1,16 +1,10 @@
 (load "test.scm")
 (load "4/4.44.scm")
 (load "evaluator_test.scm")
-(load "4/4.4.scm")
-(load "4/4.6.scm")
 (load "stream.scm")
 (load "debug.scm")
 
 (define (test bench?)
-  (define test-suite
-    (setup-test-amb (lambda (syntax) (new-derived-and-or-syntax (new-syntax syntax)))
-                    '()
-                    '()))
   (define (test-fn ambeval env)
     (ambeval queens env nop-succeed nop-fail)
     (let ((want-1 (list (list (cons 1 1))))
@@ -27,7 +21,7 @@
     (ambeval queens env nop-succeed nop-fail)
     (with-print-time drain-amb ambeval '(queens 7) env))
   (if bench?
-    (test-suite bench-fn)
-    (test-suite test-fn)))
+    (full-feature-amb-suite bench-fn)
+    (full-feature-amb-suite test-fn)))
 (test #f)
 ;(test #t)

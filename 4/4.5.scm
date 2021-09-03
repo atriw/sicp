@@ -1,4 +1,4 @@
-(define (new-syntax syntax)
+(define (new-cond-if-syntax syntax)
   (define sequence->exp (syntax 'sequence->exp))
   (define make-if (syntax 'make-if))
   (define (make-application operator operands)

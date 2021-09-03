@@ -24,5 +24,5 @@
     (assert-eq 3 (eval '(and true 2 (- 4 1)) env) "Failed and value")
     (assert-eq #f (eval '(or (= 1 2) false false) env) "Failed or false"))
   (test-suite test-fn))
-(test new-syntax make-and-or-implementation)
+(test new-and-or-syntax make-and-or-implementation)
 (test new-derived-and-or-syntax make-derived-and-or-implementation)

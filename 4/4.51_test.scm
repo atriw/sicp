@@ -8,7 +8,7 @@
 
 (define (test)
   (define test-suite
-    (setup-test-amb (lambda (syntax) (new-permanent-assignment-syntax (new-derived-and-or-syntax (new-syntax syntax))))
+    (setup-test-amb (lambda (syntax) (new-permanent-assignment-syntax (new-derived-and-or-syntax (new-let-syntax syntax))))
                     '()
                     implement-analyze-permanent-assignment))
   (define (test-fn ambeval env)

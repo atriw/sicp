@@ -4,7 +4,7 @@
 
 (define (test)
   (define test-suite
-    (setup-test-analyzing new-syntax '() '()))
+    (setup-test-analyzing new-let-syntax '() '()))
   (define (test-fn eval env)
     (assert-eq 7
                (eval '(let ((x 3) (y 4)) false (+ x y)) env)

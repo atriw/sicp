@@ -1,5 +1,5 @@
 ; Copied from 4/4.6.scm
-(define (new-syntax syntax)
+(define (new-let-syntax syntax)
   (define (tagged-list? exp tag)
     (if (pair? exp)
       (eq? (car exp) tag)

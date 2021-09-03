@@ -3,7 +3,7 @@
 (load "evaluator_test.scm")
 
 (define (test)
-  (define test-suite (setup-test new-syntax '() '()))
+  (define test-suite (setup-test new-application-call-syntax '() '()))
   (define (test-fn eval env)
     (assert-error (lambda () (eval '(+ 1 2) env)) "Application should start with 'call'")
     (assert-eq 3 (eval '(call + 1 2) env) "Failed eval '(call + 1 2)"))

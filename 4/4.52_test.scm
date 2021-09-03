@@ -8,7 +8,7 @@
 
 (define (test)
   (define test-suite
-    (setup-test-amb (lambda (syntax) (new-if-fail-syntax (new-derived-and-or-syntax (new-syntax syntax))))
+    (setup-test-amb (lambda (syntax) (new-if-fail-syntax (new-derived-and-or-syntax (new-let-syntax syntax))))
                     '()
                     implement-analyze-if-fail))
   (define (test-fn ambeval env)

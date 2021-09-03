@@ -110,7 +110,7 @@
     (list new-permanent-assignment-syntax
           new-if-fail-syntax
           new-derived-and-or-syntax
-          new-syntax))
+          new-let-syntax))
   (let ((env-model (make-environment-model))
         (syntax (fold-right (lambda (cur acc) (cur acc)) (make-syntax) syntaxs)))
     (let ((evaluator (make-amb-evaluator syntax env-model)))
@@ -176,7 +176,7 @@
       (new-if-fail-syntax
         (new-permanent-assignment-syntax
           (new-derived-and-or-syntax
-            (new-syntax syntax)))))
+            (new-let-syntax syntax)))))
     '()
     (lambda (evaluator syntax env-model)
       (implement-analyze-permanent-assignment evaluator syntax env-model)
