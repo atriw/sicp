@@ -1,0 +1,128 @@
+#1 Introductory assignment
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps1/ps1_1.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps1/ps1_1.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps1/ps1_1.ps
+
+#2 The Game of Twenty-One
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps2tw1/ps2tw1.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps2tw1/ps2tw1.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps2tw1/ps2tw1.ps
+
+#3 Graphing with higher-order procedures
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps2/ps2.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps2/curves.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps2/drawing.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps2/utils.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps2/ps2.ps
+
+#4 RSA encryption
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps3/ps3rsa.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps3/diagrams.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps3/figure1.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps3/rsa.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps3/ps3rsa.ps
+
+#5 Prisoner's dilemma
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4prs/ps4prs.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4prs/ps4prs.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4prs/ps4prs.ps
+
+#6 Picture language
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4hnd/ps4hnd.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4hnd/hend.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4hnd/hutils.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4hnd/psgo.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4hnd/prmpnt.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4hnd/einstein.pgm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4hnd/fovnder.pgm
+
+#7 Term-rewriting evaluator
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4/ps4.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4/ps4.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4/trnotes.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4/trnotes.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4/smeval.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4/smfresh.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4/smscope.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4/smstep.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4/smsyntax.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4/temp.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps4/tests.scm
+
+#8 Freshman advisor
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps5adv/adv.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps5adv/adv.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps5adv/adv.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps5adv/match.scm
+
+#9 Generic arithmetic
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps5/ps5.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps5/ps5.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps5/ps5-code.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps5/put-get.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps5/types.scm
+
+#10 Object-oriented adventure game
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps6/ps6game.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps6/exercise1.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps6/meta-advent.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps6/ps6game.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps6/notes.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps6/notes.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps6/game.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps6/world.scm
+
+#11 Concurrency
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps7/ps7.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps7/ps7.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps7/gauss.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps7/parallel.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps7/nikkei.scm
+
+#12 Streams and series
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps9/ps9.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps9/ps9.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps9/ps9code.scm
+
+#13 Evaluators
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps8/ps8.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps8/ps8.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps8/analyze.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps8/evdata.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps8/meval.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps8/syntax.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps8/ps8defs.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps8/ps8-ans.scm
+
+#14 Languages for object-oriented programming
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps7oop/ps7oop.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps7oop/ps7oop.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps7oop/teval.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps7oop/mod.scm
+
+#15 Register Machines and Compilation
+
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps10/ps10.tex
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps10/ps10.ps
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps10/assemble.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps10/compdata.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps10/compiler.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps10/eceval.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps10/evdata.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps10/naivecom.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps10/regsim.scm
+https://mitpress.mit.edu/sites/default/files/sicp/psets/ps10/syntax.scm
